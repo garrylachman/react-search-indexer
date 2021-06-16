@@ -63,8 +63,8 @@ const Template: Story<StoryArgs> = (args: StoryArgs) => {
 
   return (
     <>
-     <Highlight className='javascript'>
-      {`
+     <Highlight className='javascript' element='pre'>
+        {`
         import { useSearchIndexer, SearchIndexerOptions, IndexState } from './search-indexer'
         interface DummyData {
           id: number,
@@ -112,12 +112,12 @@ const Template: Story<StoryArgs> = (args: StoryArgs) => {
           return (
             <>
             /// use here searchResults for search results
+            console.log("render");
             </>
           )
         }
 
-        export default App
-      `}
+        export default App`}
     </Highlight>
       <h2>Prepare Data</h2>
       
