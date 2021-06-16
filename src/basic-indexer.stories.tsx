@@ -1,7 +1,8 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
+import {  } from '@storybook/csf'
 
-import { useSearchIndexer, SearchIndexerOptions, IndexState } from './search-indexer'
+import { useSearchIndexer, SearchIndexerOptions } from './search-indexer'
 
 const sleep = (milliseconds:number) => {
   return new Promise(resolve => setTimeout(resolve, milliseconds))
@@ -53,49 +54,40 @@ const Template: Story<StoryArgs> = (args: StoryArgs) => {
       textOne: randomString(20),
       textTwo: randomString(30)
     }));
-    console.log("add", addState)
     setDummyState(oldState => ([...oldState, ...addState]));
   }, [dummyState]);
 
-  React.useEffect(() => {
-    console.log("effect", dummyState)
-  }, [dummyState])
-
-  const [searchTermState, setSearchTermState] = React.useState<string>('');
-  const searchResults = React.useMemo(() => indexedState.filter((record:IndexState<DummyData>) => record.index.indexOf(searchTermState) > -1), [indexedState, searchTermState])
 
   return (
     <>
-      <h2>Prepare Data</h2>
-      
       <button onClick={addData}>Add & Index {args.numOfDummyRecords} Records</button>
-      <div>
-        Dummy records: {dummyState.length}
+      <div style={{flex: 1, flexDirection: 'row', display: 'flex', paddingTop: 5}}>
+        <div style={{flex: 1}}>
+          Dummy records: {dummyState.length}
+        </div>
+        <div style={{flex: 1}}>
+          Indexed records: {indexedState.length}
+        </div>
       </div>
-      <div>
-        Indexed records: {indexedState.length}
-      </div>
-
-      <h2>Search</h2>
-      <input value={searchTermState} onChange={(event) => setSearchTermState(event.target?.value)} />
-
-      <h2>Results</h2>
-      {searchResults && 
-        searchResults.map((item, index) => (<div>{JSON.stringify(item.data)}</div>))
-      }
     </>
   )
 }
+
 
 export default {
   title: 'useSearchIndexer',
   component: Template,
   argTypes: {
- 
+    delay: {
+      control: {
+        type: 'range', min: 0, max: 10, step: 1
+      }
+    }
   },
 } as Meta;
 
-export const Search = Template.bind({});
-Search.args = {
+export const Basic = Template.bind({});
+Basic.args = {
+  delay: 0,
   numOfDummyRecords: 10
 }

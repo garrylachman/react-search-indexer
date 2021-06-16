@@ -1,7 +1,7 @@
 import React from 'react';
 import PQueue from 'p-queue/dist';
 
-interface IndexState<T> {
+export interface IndexState<T> {
     [key: string]: {
         index: string | null,
         data: T
@@ -84,11 +84,10 @@ export function useSearchIndexer<T>(state:T[], options:SearchIndexerOptions<T>) 
 
     }, [state])
 
-    React.useEffect(() => {
-        console.log("indexState effect", indexState);
-    }, [indexState])
-
-    const indexedState = React.useMemo(() => Object.values(indexState).filter((item) => item.index != null), [indexState])
+    const indexedState:{
+        index: string | null,
+        data: T
+    }[] = React.useMemo(() => Object.values(indexState).filter((item) => item.index != null), [indexState])
 
     return [indexState, indexedState];
 }
