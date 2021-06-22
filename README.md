@@ -2,6 +2,7 @@
 React state indexer for better search
 
 This library is just pretent to be a alegent way to solve simple problem in a long way :)
+I can think about many ways to resolve this case, most of them better than this over-kill solution - but still - i love all my children equally :) LOL
 
 ### The Issue we try to solve
 #### The Problem
