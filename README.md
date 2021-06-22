@@ -42,3 +42,6 @@ const searchResults = React.useMemo(() => Array.from(indexedState as []).filter(
 Now by settings the `searchTermState` state, we trigger the searchResults Memo.
 
 Storybook: https://garrylachman.github.io/react-search-indexer/
+
+### License
+React Native Awesome Table is [MIT licensed](./LICENSE).
